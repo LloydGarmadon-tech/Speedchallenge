@@ -1,0 +1,21 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+artifacts/
+.env
+*.user
+.vs/
+
+**/secrets/
+
+# Zugangsdaten und Zertifikate
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Private Dokumentation
+INTERVIEW.md

@@ -1,0 +1,38 @@
+services:
+  broker:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./acl:/mosquitto/config/acl:ro
+      - ./secrets/passwords:/mosquitto/config/passwords:ro
+  server:
+    build:
+      context: ../..
+      dockerfile: infrastructure/online/server.Dockerfile
+    restart: unless-stopped
+    depends_on: [broker]
+    environment:
+      MQTT_URL: ws://broker:9001
+      MQTT_USERNAME: server
+      MQTT_PASSWORD: ${SERVER_PASSWORD:?Run setup.sh first}
+  web:
+    build:
+      context: ../..
+      dockerfile: infrastructure/online/client.Dockerfile
+      args:
+        VITE_MQTT_PASSWORD: ${PLAYER_PASSWORD:?Run setup.sh first}
+    restart: unless-stopped
+    depends_on: [broker]
+    volumes:
+      - ./secrets/htpasswd:/run/demo/htpasswd:ro
+    ports:
+      - "127.0.0.1:18080:8080"
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    profiles: [online]
+    depends_on: [web]
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}

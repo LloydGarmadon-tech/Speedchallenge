@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speedchallenge</title>
+  </head>
+  <body>
+    <main>
+      <h1>Speedchallenge</h1>
+      <p>Wer den vorgegebenen Satz zuerst korrekt tippt, gewinnt.</p>
+
+      <section aria-labelledby="join-heading">
+        <h2 id="join-heading">Mitspielen</h2>
+        <label for="player-name">Dein Name</label>
+        <input id="player-name" name="player-name" maxlength="24" autocomplete="nickname" placeholder="Spielername" />
+        <button id="join" type="button" disabled>Beitreten</button><button id="leave" type="button" hidden>Verlassen</button>
+        <p id="connection-status" role="status"></p>
+      </section>
+
+      <section aria-labelledby="lobby-heading">
+        <h2 id="lobby-heading">Lobby</h2>
+        <ul id="players"></ul><p id="lobby-status" role="status">Noch keine Spieler verbunden.</p>
+        <button id="ready" type="button" disabled>Bereit</button>
+      </section>
+
+      <section aria-labelledby="game-heading">
+        <h2 id="game-heading">Spielrunde</h2>
+        <p id="game-status" role="status">Warte auf eine Runde.</p><p id="target-text">Der Text erscheint, sobald die Runde startet.</p>
+        <label for="typing-input">Deine Eingabe</label>
+        <textarea id="typing-input" rows="3" maxlength="500" spellcheck="false" autocomplete="off" autocapitalize="off" disabled placeholder="Warte auf den Start …"></textarea><p id="input-feedback" role="status"></p><button id="restart" type="button" hidden>Neue Runde</button>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+
+

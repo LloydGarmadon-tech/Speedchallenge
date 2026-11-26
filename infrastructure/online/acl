@@ -1,0 +1,6 @@
+user server
+topic read speedchallenge/commands
+topic write speedchallenge/lobby
+user player
+topic write speedchallenge/commands
+topic read speedchallenge/lobby

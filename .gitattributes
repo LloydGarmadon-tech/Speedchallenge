@@ -1,0 +1,13 @@
+# Einheitliche Zeilenenden
+* text=auto eol=lf
+
+# Windows-Skripte
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binaerdateien
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.zip binary
